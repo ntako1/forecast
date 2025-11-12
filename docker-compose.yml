@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  ai-fastapi:
+    build: .
+    container_name: ai-fastapi
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app               # ✅ Συνδέει τον τρέχοντα φάκελο με τον /app στο container
+    environment:
+      - PYTHONUNBUFFERED=1   # για να φαίνονται άμεσα τα logs
+    command: uvicorn run_ai_api:app --host 0.0.0.0 --port 8000 --reload
+    restart: always          # το κάνει restart αυτόματα αν κρασάρει
